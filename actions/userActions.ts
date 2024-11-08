@@ -21,12 +21,18 @@ export const getUserData = async (userId: number) => {
   return user;
 }
 
-export const addUser = async () => {
+export const addUser = async (user:any) => {
   //Dummy values until the real authentication with clerk 
-  await db.insert(users).values({
-    name: "Aslam",
-    email: "a@gmail.com"
-  });
-  revalidatePath("/");
+  await db
+    .insert(users)
+    .values({
+      clerkId: user?.clerkId,
+      email: user?.email,
+      name: user?.name!,
+      firstName: user?.firstName,
+      lastName: user?.lastName,
+      photo: user?.photo,
+    })
+    .returning({ clerkClientId: users?.clerkId });
 };
 
