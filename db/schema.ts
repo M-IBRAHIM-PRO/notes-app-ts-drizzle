@@ -15,7 +15,7 @@ export const users=pgTable("users",{
 });
 
 export const todo = pgTable("todo", {
-  id: bigint("id", {mode:"number"}).primaryKey(),
+  id: integer("id").primaryKey(),
   text: text("text").notNull(),
   done: boolean("done").default(false).notNull(),
   userId:integer("userId").notNull().references(()=>users.id),

@@ -19,14 +19,14 @@ const Todos: FC<Props> = ({ todos, user }) => {
   // Function to create a new todo item
   const createTodo = (text: string) => {
     // addUser(); //For the first time only
-    const id = (todoItems.at(-1)?.id || BigInt(0)) + BigInt(1);
+    const id = (todoItems.at(-1)?.id || (0)) + (1);
     console.log("Note ID: ", id);
     addTodo(id, text, user?.id);
     setTodoItems((prev) => [...prev, { id: id, text, done: false, userId:user?.id }]);
   };
 
   // Function to change the text of a todo item
-  const changeTodoText = (id: BigInt, text: string) => {
+  const changeTodoText = (id: number, text: string) => {
     setTodoItems((prev) =>
       prev.map((todo) => (todo.id === id ? { ...todo, text } : todo))
     );
@@ -34,7 +34,7 @@ const Todos: FC<Props> = ({ todos, user }) => {
   };
 
   // Function to toggle the "done" status of a todo item
-  const toggleIsTodoDone = (id: BigInt) => {
+  const toggleIsTodoDone = (id: number) => {
     setTodoItems((prev) =>
       prev.map((todo) => (todo.id === id ? { ...todo, done: !todo.done } : todo))
     );
@@ -42,7 +42,7 @@ const Todos: FC<Props> = ({ todos, user }) => {
   };
 
   // Function to delete a todo item
-  const deleteTodoItem = (id: BigInt) => {
+  const deleteTodoItem = (id: number) => {
     setTodoItems((prev) => prev.filter((todo) => todo.id !== id));
     deleteTodo(id);
   };
@@ -55,7 +55,7 @@ const Todos: FC<Props> = ({ todos, user }) => {
         {/* Mapping through todoItems and rendering Todo component for each */}
         {todoItems.map((todo) => (
           <Todo
-            key={todo.id}
+            key={Number(todo?.id)}
             todo={todo}
             changeTodoText={changeTodoText}
             toggleIsTodoDone={toggleIsTodoDone}

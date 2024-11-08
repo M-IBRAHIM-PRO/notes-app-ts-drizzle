@@ -15,6 +15,13 @@
       "when": 1731068645896,
       "tag": "0001_concerned_power_man",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1731087083035,
+      "tag": "0002_colorful_mesmero",
+      "breakpoints": true
     }
   ]
 }
