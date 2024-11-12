@@ -5,22 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1730953628911,
-      "tag": "0000_lowly_vanisher",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1731068645896,
-      "tag": "0001_concerned_power_man",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1731087083035,
-      "tag": "0002_colorful_mesmero",
+      "when": 1731399596111,
+      "tag": "0000_high_enchantress",
       "breakpoints": true
     }
   ]

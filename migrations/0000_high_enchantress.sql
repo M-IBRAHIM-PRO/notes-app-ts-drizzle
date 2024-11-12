@@ -8,7 +8,11 @@ CREATE TABLE IF NOT EXISTS "todo" (
 CREATE TABLE IF NOT EXISTS "users" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"name" text NOT NULL,
-	"email" text,
+	"email" text NOT NULL,
+	"clerkId" text NOT NULL,
+	"photo" text NOT NULL,
+	"firstName" text NOT NULL,
+	"lastName" text NOT NULL,
 	"createdAt" timestamp DEFAULT now() NOT NULL,
 	"updatedAt" timestamp DEFAULT now() NOT NULL,
 	CONSTRAINT "users_email_unique" UNIQUE("email")

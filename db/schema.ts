@@ -5,7 +5,7 @@ import { integer, text, boolean, pgTable, serial, timestamp } from "drizzle-orm/
 export const users=pgTable("users",{
   id:serial("id").primaryKey(),
   name:text("name").notNull(),
-  email:text("email").unique(),
+  email:text("email").notNull().unique(),
   clerkId:text("clerkId").notNull(),
   photo:text("photo").notNull(), //Link of google account photo
   firstName:text("firstName").notNull(),
