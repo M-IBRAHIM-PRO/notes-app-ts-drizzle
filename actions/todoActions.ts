@@ -9,14 +9,15 @@ export const getData = async (userId:number) => {  //Get the data for specific u
   return data
 };
 
-export const addTodo = async (id: number, text: string, userId  :number) => {
+export const addTodo = async (id: number, text: string, userId: number) => {
   await db.insert(todo).values({
-    id: id,
+    id,
     text: text,
-    userId:userId
+    userId,
   });
   revalidatePath("/");
 };
+
 
 export const deleteTodo = async (id: number) => {
   await db.delete(todo).where(eq(todo.id, id));
@@ -24,11 +25,11 @@ export const deleteTodo = async (id: number) => {
   revalidatePath("/");
 };
 
-export const toggleTodo = async (id: number) => {
+export const toggleTodo = async (id: number, done: boolean) => {
   await db
     .update(todo)
     .set({
-      done: not(todo.done),
+      done: done,
     })
     .where(eq(todo.id, id));
 

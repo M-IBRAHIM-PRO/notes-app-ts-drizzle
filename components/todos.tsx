@@ -1,28 +1,32 @@
 "use client";
 import { FC, useState } from "react";
 import { todoType } from "@/types/todoType";
+// import {userType} from "@/types/userType"
 import Todo from "./todo";
 import AddTodo from "./addTodo";
 import { addTodo, deleteTodo, editTodo, toggleTodo } from "@/actions/todoActions";
 import { addUser } from "@/actions/userActions";
 import { bigint } from "drizzle-orm/mysql-core";
+import { userType } from "@/types/userType";
 
 interface Props {
   todos: todoType[];
-  user:any; //Temporaryliy untill we create its type in types directory
+  user:userType; //Temporaryliy untill we create its type in types directory
 }
 
-const Todos: FC<Props> = ({ todos, user }) => {
+const Todos: FC<Props> = ({ todos=[], user }) => {
   // State to manage the list of todo items
   const [todoItems, setTodoItems] = useState<todoType[]>(todos);
 
   // Function to create a new todo item
   const createTodo = (text: string) => {
-    // addUser(); //For the first time only
-    const id = (todoItems.at(-1)?.id || (0)) + (1);
-    console.log("Note ID: ", id);
+    // addUser();
+    const id = new Date().getTime();
     addTodo(id, text, user?.id);
-    setTodoItems((prev) => [...prev, { id: id, text, done: false, userId:user?.id }]);
+    setTodoItems((prev) => [
+      ...prev,
+      { id: id, text, done: false, userId: user?.id },
+    ]);
   };
 
   // Function to change the text of a todo item
@@ -34,11 +38,13 @@ const Todos: FC<Props> = ({ todos, user }) => {
   };
 
   // Function to toggle the "done" status of a todo item
-  const toggleIsTodoDone = (id: number) => {
+  const toggleIsTodoDone = (id: number, done: boolean) => {
     setTodoItems((prev) =>
-      prev.map((todo) => (todo.id === id ? { ...todo, done: !todo.done } : todo))
+      prev.map((todo) =>
+        todo.id === id ? { ...todo, done: !todo.done } : todo
+      )
     );
-    toggleTodo(id);
+    toggleTodo(id, done);
   };
 
   // Function to delete a todo item
@@ -55,7 +61,7 @@ const Todos: FC<Props> = ({ todos, user }) => {
         {/* Mapping through todoItems and rendering Todo component for each */}
         {todoItems.map((todo) => (
           <Todo
-            key={Number(todo?.id)}
+            key={todo.id}
             todo={todo}
             changeTodoText={changeTodoText}
             toggleIsTodoDone={toggleIsTodoDone}
@@ -68,5 +74,6 @@ const Todos: FC<Props> = ({ todos, user }) => {
     </main>
   );
 };
+
 
 export default Todos;
