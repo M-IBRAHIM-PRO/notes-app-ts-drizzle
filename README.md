@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is the practice app that helps you understand the basics of Next.js with typescript.
+# Notes App
+
+This is a Notes App built with Next.js and TypeScript, styled with Tailwind CSS, and connected to a Neon PostgreSQL database. The clerk handles user management, including webhook configurations. The project is deployed on Vercel.
+
+## Features
+
+- **User Authentication**: Powered by Clerk, with webhook support for real-time user data updates and signIn and signUp with google.
+- **CRUD for Notes**: Users can create, read, update, and delete notes.
+- **Persistent Data**: Notes are stored in a PostgreSQL database hosted on Neon.
+- **Deployed on Vercel**: Efficient serverless deployment with automatic updates on push.
+
+## Tech Stack
+
+- **Next.js** - Framework for React apps with SSR support
+- **TypeScript** - Statically typed language for more robust code
+- **Tailwind CSS** - Utility-first CSS framework for styling
+- **Neon PostgreSQL** - Serverless PostgreSQL database
+- **Clerk** - Authentication and user management
+- **Vercel** - Hosting and deployment platform
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Node.js (version 14 or higher)
+- Clerk account and project setup
+- Neon PostgreSQL database set up with connection URL
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Clone the Repository**:
+    ```bash
+    git clone https://github.com/your-username/notes-app.git
+    cd notes-app
+    ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. **Install Dependencies**:
+    ```bash
+    npm install
+    ```
 
-## Learn More
+3. **Set Up Environment Variables**: In the root directory, create a `.env.local` file and add your environment variables:
+    ```env
+    DATABASE_URL=your-db-url
+    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=clerk-api-key
+    CLERK_SECRET_KEY=clerk-secret-key
+    NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+    NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+    WEBHOOK_SECRET=webhook-secret
+    ```
 
-To learn more about Next.js, take a look at the following resources:
+4. **Run Database Migrations** (if applicable):
+    ```bash
+    npx drizzle-kit db push
+    ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5. **Start the Development Server**:
+    ```bash
+    npm run dev
+    ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+    Visit `http://localhost:3000` to view the app locally.
 
-## Deploy on Vercel
+### Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project is configured to deploy seamlessly on **Vercel**. Push the repository on the github and once your environment variables are set on Vercel, Vercel will automatically build and deploy your application and keeps the track of deployments based on commits.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Project Structure
+
+- **/components** - Reusable UI components.
+- **/pages** - Next.js pages for routing.
+- **/lib** - Database and Clerk configuration.
+- **/actions** - Functions for interacting with the database and user actions.
+
+## Acknowledgments
+
+- [Clerk](https://clerk.dev/) for authentication and user management.
+- [Neon](https://neon.tech/) for serverless PostgreSQL database hosting.
+- [Vercel](https://vercel.com/) for deployment and hosting.
