@@ -11,7 +11,7 @@ import { userType } from "@/types/userType";
 
 interface Props {
   todos: todoType[];
-  user:userType; //Temporaryliy untill we create its type in types directory
+  user:userType; 
 }
 
 const Todos: FC<Props> = ({ todos=[], user }) => {

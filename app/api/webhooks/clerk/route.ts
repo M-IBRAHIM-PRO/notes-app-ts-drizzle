@@ -3,6 +3,9 @@ import { headers } from 'next/headers'
 import { WebhookEvent } from '@clerk/nextjs/server'
 import { NextResponse,  } from 'next/server'
 import { addUser } from '@/actions/userActions'
+import { userType, createUserType } from '@/types/userType'
+
+
 
 export async function POST(req: Request) {
     // You can find this in the Clerk Dashboard -> Webhooks -> choose the endpoint
@@ -59,12 +62,12 @@ export async function POST(req: Request) {
     if (evt.type === 'user.created') {
         const { id, email_addresses, image_url, first_name, last_name, username } =
             evt.data;
-        const user = {
+        const user:createUserType = {
             clerkId: id,
             email: email_addresses[0].email_address,
             name: username!,
-            firstName: first_name,
-            lastName: last_name,
+            firstName: first_name!,
+            lastName: last_name!,
             photo: image_url,
         };
         await addUser(user);
